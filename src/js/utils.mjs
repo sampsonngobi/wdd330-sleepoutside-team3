@@ -29,4 +29,23 @@ export function getParam(param) {
   const urlParams = new URLSearchParams(queryString);
   return urlParams.get(param);
 }
+export function renderListWithTemplate(
+  templateFn,
+  parentElement,
+  list = [],
+  position = "afterbegin",
+  clear = false
+) {
+  if (!parentElement || typeof templateFn !== "function") return;
 
+  if (clear) {
+    parentElement.innerHTML = "";
+  }
+
+  for (const item of list) {
+    const html = templateFn(item);
+    if (typeof html === "string") {
+      parentElement.insertAdjacentHTML(position, html);
+    }
+  }
+}
