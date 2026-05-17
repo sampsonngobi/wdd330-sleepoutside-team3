@@ -49,3 +49,21 @@ export function renderListWithTemplate(
     }
   }
 }
+
+// update the cart count badge shown next to the cart icon
+export function updateCartCount(storageKey = "so-cart", anchorSelector = ".cart a") {
+  // Read cart from localStorage and set data-count on the cart anchor
+  const raw = localStorage.getItem(storageKey) || "[]";
+  let items;
+  try {
+    items = JSON.parse(raw);
+  } catch (e) {
+    items = [];
+  }
+  const count = Array.isArray(items) ? items.length : 0;
+
+  const anchor = document.querySelector(anchorSelector);
+  if (!anchor) return;
+
+  anchor.dataset.count = String(count);
+}
