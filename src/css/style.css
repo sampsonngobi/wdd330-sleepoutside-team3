@@ -130,6 +130,33 @@ button {
 .cart:hover svg {
   fill: gray;
 }
+/* cart badge via data-count attribute on the anchor */
+.cart a {
+  position: relative;
+  display: inline-block;
+}
+
+.cart a::after {
+  content: attr(data-count);
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  min-width: 18px;
+  height: 18px;
+  line-height: 18px;
+  padding: 0 5px;
+  border-radius: 12px;
+  background: var(--tertiary-color);
+  color: white;
+  font-size: 0.75rem;
+  text-align: center;
+  display: inline-block;
+}
+
+.cart a[data-count="0"]::after,
+.cart a:not([data-count])::after {
+  display: none;
+}
 
 /* End cart icon styles */
 
